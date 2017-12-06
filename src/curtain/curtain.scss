@@ -4,6 +4,30 @@
   box-sizing: border-box;
 }
 
+@mixin baseSetting () {
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  position: absolute;
+}
+
+@mixin flex($num) {
+  -webkit-flex: $num;
+  flex: $num;
+}
+
+@mixin commonTransitionBazierSetting() {
+  transition: all 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+@mixin backgroundSetting($url) {
+  background-image: url($url); // background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .container {
   width: 100%;
   height: 100%;
@@ -11,11 +35,11 @@
   position: relative;
 }
 
-#curtain-container{
+#curtain-container {
   display: -webkit-flex;
   display: flex;
   position: relative;
-  .placeholder{
+  .placeholder {
     visibility: hidden;
     height: 100%;
     width: 100%;
@@ -27,127 +51,101 @@
   }
 }
 
-
-
 .curtain {
-  top:0;
-  left:0;
-  display: -webkit-flex;
-  display: flex;
   position: absolute;
   margin: 0 auto;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  img {
-    width: 100%;
-  }
 }
 
+.text-container {
+  @include baseSetting();
+  z-index: 5;
+}
 
 .text {
   position: absolute;
+  float: left;
   z-index: 4;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.outer-panel-container {
+  @include baseSetting();
 }
 
 .left-panel {
-  -webkit-flex: 1;
-  flex: 1; // width: 50%;
-  // height: 100vh;
+  @include flex(1);
   float: left;
-  z-index: 3;
   position: relative;
+  z-index: 4;
   transform: translateY(-10%);
-  transform-origin: bottom left;
-  transition: all 1s cubic-bezier(0.645, 0.045, 0.355, 1);
-  .panel-background {
-    left:0;
-    top:0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    transform: SkewY(-8deg);
-    transition: all 1s cubic-bezier(0.645, 0.045, 0.355, 1);
-  }
+  @include commonTransitionBazierSetting();
+}
+
+.left-panel-additional {
+  z-index: 3;
+  background: #fff;
+  transform: translateY(-10%) SkewY(-8deg);
+  ;
 }
 
 .right-panel {
-  -webkit-flex: 1;
-  flex: 1; // width: 50%;
-  // height: 100vh;
+  @include flex(1);
   float: left;
-  z-index: 3;
   position: relative;
   transform: translateY(-100%);
-  transition: all 1s cubic-bezier(0.645, 0.045, 0.355, 1);
-  .panel-background {
-    left:0;
-    top:0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    transform: SkewY(0);
-    transition: all 1s cubic-bezier(0.645, 0.045, 0.355, 1);
-  }
+  @include commonTransitionBazierSetting();
+}
+
+.right-panel-additional {
+  z-index: 3;
+  background: #fff;
+  transform: translateY(-100%) SkewY(0deg);
+  ;
 }
 
 .content {
-  position: absolute;
-  width: 100%; // top: 50%;
-  height: 100%;
+  @include baseSetting();
   background: #333;
   z-index: 1;
-  display: -webkit-flex;
-  display: flex;
 }
 
+
+
 .inner-left-panel {
-  height:100%;
-  width:50%;
-  -webkit-flex: 1;
-  flex: 1;
-  transition: all 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+  @include flex(1);
+  height: 100%;
+  width: 50%;
   transform: translateY(10%);
-  background-image: url('./images/wo.jpg'); // background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
+  @include commonTransitionBazierSetting();
+  @include backgroundSetting('./images/wo.jpg')
 }
 
 .inner-right-panel {
-  -webkit-flex: 1;
-  flex: 1;
-  transition: all 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+  @include flex(1);
   transform: translateY(0%);
-  background-image: url('./images/man.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  // background-repeat: no-repeat;
+  @include commonTransitionBazierSetting();
+  @include backgroundSetting('./images/man.jpg');
 }
 
 .curtain.on {
-  
   .left-panel {
     transform: translateY(-100%);
-    .panel-background {
-      width: 100%;
-      height: 100%;
-      background: #fff;
-      transform: skewY(0);
-    }
+  }
+  .left-panel-additional {
+    background: #fff;
+    transform: translateY(-100%) skewY(0);
   }
   .right-panel {
     transform: translateY(-10%);
-    .panel-background {
-      width: 100%;
-      height: 100%;
-      background: #fff;
-      transform: skewY(-8deg);
-    }
+  }
+  .right-panel-additional {
+    background: #fff;
+    transform: translateY(-10%) skewY(-8deg);
   }
   .inner-left-panel {
     transform: translateY(0%);
