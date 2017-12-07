@@ -23,8 +23,11 @@ $(document).ready(function () {
     }());
 
     if (scrollingDown) {
+      
+      if ($scene.hasClass('on')) {
+        e.preventDefault();
+      }
       $scene.addClass('on');
-      e.preventDefault();
     } else {
       $scene.removeClass('on');
     }
