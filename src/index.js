@@ -1,14 +1,17 @@
-import curtainStyle from './curtain/curtain.scss'
-import curtainHtml from './curtain/curtain.html'
-import curtainJs from './curtain/curtain.js'
+import Container from './init.js';
+import layout from './layout/layout.scss';
+import curtainHtml from './curtain/index.js';
+import rotateHtml from './rotate/index.js';
 
-
-function component() {
+function component(section) {
     var element = document.createElement('div');
-    element.innerHTML = curtainHtml;
+    element.className = 'section';
+    element.id = section.id||'';
+    element.innerHTML = section.content;
     
     return element;
 }
-
-document.body.appendChild(component());
+var container = new Container(document);
+container.addSection(rotateHtml);
+container.addSection(curtainHtml);
 
