@@ -1,0 +1,131 @@
+.wrap {
+    width: 1100px;
+    border: 1px solid red;
+    height: 600px;
+  }
+  .tab-group {
+    border: 1px solid blue;
+    
+    max-width: 40em;
+      width: 100%;
+  }
+  
+  /*
+      Individual tabs are 100% of wrapper and position 
+      themselves relative to previous tab
+  
+  */
+  
+  .tab {
+      position: relative;
+      width: 100%;
+  }
+  
+  /*
+      Radion elements are hidden so they
+      will be positioned absolutely, set to top 
+      left corner and positioned out of way
+  */
+  
+  .tab input {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: -999;
+  }
+  
+  /*
+      Input label will toggle radio buttons 
+      when label is clicked it will reveal its
+      adjacent accordion content
+  
+  */
+  
+  
+  .tab label {
+      background: #72d2c6;
+      color: #fff;
+      display: block; /* makes Label span full width */
+      font-weight: bold;
+      line-height: 3; /* increases clicking area */
+      padding-left: .5em;
+      margin-bottom: .5em;
+      /* Adds transiton to letter spacing on hover*/
+      transition: letter-spacing .55s;
+  }
+  
+  /* 
+      Focus and Hover styles
+  */
+  
+  .tab input:focus + label,
+  .tab label:hover {
+      background: #85d8ce;
+      letter-spacing: 1px;
+  }
+  
+  .tab-content {
+      /* hides the content of the divs */
+      max-height: 0;
+      overflow: hidden;
+      /* slide transition for when tab is opened 
+         prevents jerky content */
+      transition: all .35s;
+  }
+  
+  .tab-content p {
+      margin: 1em;
+  }
+  
+  
+  .tab input:checked ~ .tab-content {
+      /*uses general sibling combinator to 
+        open tabs when radio inputs are selected */
+      max-height: 6.25em;
+      /* sets height to largest accordion tab */
+  }
+  
+  .tab-group{
+    float: left;
+  }
+  .goods_group{
+    float: right;
+    position: relative;
+    width:500px;
+    height:500px;
+  }
+  .goods_group img{
+    position: absolute;
+    top:0px;
+    left:0px;
+    transform: matrix(0.4924, 0.08682, -0.08682, 0.4924, 200, -800);
+    opacity: 0; 
+    backface-visibility: hidden;
+  /*   transform: scale(1.1); */
+  }
+  .goods_group .img1{
+    transition: all 0.5s;
+  }
+  .goods_group .img2{
+    transition: all 0.5s;
+  }
+  .goods_group .img3{
+    transition: all 0.5s;
+  }
+  .goods_group img.active{
+    transform: matrix(1, 0, 0, 1, 0, 0);
+    opacity: 1 !important;
+  /*   transition: all 1s; */
+    animation:spin 1s linear;
+    animation-fill-mode: forward;
+  }
+  .wrap {
+    width:1100px;
+    margin: 0 auto;
+  }
+  
+  @keyframes spin{
+    0%{ opacity:0;transform: matrix(0.4924, 0.08682, -0.08682, 0.4924, 100, 800);}
+    50% { opacity:0;transform: matrix(0.4924, -0.09, 0.09, 0.4924, 100, 800);}
+    100% { opacity:1; }
+  }
